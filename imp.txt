@@ -1,0 +1,5 @@
+C:\Users\Admin\AppData\Local\Programs\Python\Python39\python -m eel main.py www --noconsole --icon logo.ico
+
+
+https://www.google.com/search?q=waether&oq=waether&aqs=chrome..69i57j0i10i131i433j0i10j0i10i131i433j0i10i433i457j0i402l2j0i10j0i10i433j46i10i131i433.1604j1j7&sourceid=chrome&ie=UTF-8&dlnr=1&sei=lG8kYrOqF8Wo1e8Piu23sAk
+https://www.google.com/search?q={city}&oq={city}&aqs=chrome.0.35i39l2j0l4j46j69i60.6128j1j7&sourceid=chrome&ie=UTF-8', headers=headers
