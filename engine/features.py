@@ -58,7 +58,7 @@ cursor = connection.cursor()
 engine = pyttsx3.init()
 voices = engine.getProperty('voices')
 # print(voices[1].id)
-engine.setProperty('voice', voices[3].id)
+engine.setProperty('voice', voices[2].id)
 engine.setProperty('rate', 174)
 
 # text to speech
@@ -126,19 +126,21 @@ def wish():
     currentTime = currentTime.strftime(
         '%I %M %p').lstrip("0").replace(" 0", " ")
     if hour > 0 and hour < 12:
-        speak("Hello, Good Morning Boss")
-        speak(" it's "+currentTime)
-        speak("I am "+ASSISTANT_NAME+", Your Personal assistant")
+        eel.WishMessage(speak("Hello, Good Morning "+OWNER_NAME))
+        eel.WishMessage(speak("it's " + currentTime))
+        eel.WishMessage(speak("I am " + ASSISTANT_NAME +
+                        ", Your Personal Assistant"))
 
     elif hour >= 12 and hour < 18:
-        speak("Hello, Good Afternoon Boss")
-        speak("it's"+currentTime)
-        speak(" I am Sofia, Your Personal assistant")
-    else:
-        eel.WishMessage(speak("Hello, Good Evening Boss"))
+        eel.WishMessage(speak("Hello, Good Afternoon "+OWNER_NAME))
         eel.WishMessage(speak("it's " + currentTime))
-        eel.WishMessage(speak("I am "+ASSISTANT_NAME))
-        eel.WishMessage(speak("How can i help you"))
+        eel.WishMessage(speak("I am " + ASSISTANT_NAME +
+                        ", Your Personal Assistant"))
+    else:
+        eel.WishMessage(speak("Hello, Good Evening "+OWNER_NAME))
+        eel.WishMessage(speak("it's " + currentTime))
+        eel.WishMessage(speak("I am " + ASSISTANT_NAME +
+                        ", Your Personal Assistant"))
 
 # Open Commands
 
@@ -264,7 +266,14 @@ headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}
 
 
-def weather(city):
+def weather(query):
+    query = query.replace("weather", "")
+    query = query.replace("of", "")
+    query = query.replace("in", "")
+    if len(query) > 0:
+        city = query+" weather"
+    else:
+        city = CITY_NAME + " weather"
     city = city.replace(" ", "+")
     res = requests.get(
         f'https://www.google.com/search?q={city}&oq={city}&aqs=chrome.0.35i39l2j0l4j46j69i60.6128j1j7&sourceid=chrome&ie=UTF-8', headers=headers)
@@ -280,6 +289,7 @@ def weather(city):
     print(weather+"°C")
     eel.weatherShow(info, weather+" °C", location, time)
     speak("its "+weather+" degree celsius and "+info+" in "+location)
+
 
 #  ************************************************** WEATHER METHOD **********************************************
 
@@ -304,7 +314,7 @@ def weather(city):
 # Make Phone Call Command
 def MakeCall(query):
     query = query.replace(ASSISTANT_NAME, "")
-    query = query.replace("call", "")
+    query = query.replace("to", "")
     query = query.replace("make a", "")
     query = query.replace("phone", "")
     query = query.replace("call", "")
@@ -320,3 +330,9 @@ def MakeCall(query):
         os.system(command)
     else:
         speak('No Data Found')
+
+
+def DisconnectCall():
+    command = 'adb shell service call phone 5'
+    speak("disconnecting call...")
+    os.system(command)

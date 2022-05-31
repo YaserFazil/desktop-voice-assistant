@@ -15,7 +15,7 @@ if __name__ == "__main__":
 
     @eel.expose
     def StartSound():
-        music_dir = "www\\assets\\audio\\start.mp3"
+        music_dir = "www\\assets\\audio\\start_sound.mp3"
         playsound(music_dir)
 
     @eel.expose

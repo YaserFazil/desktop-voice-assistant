@@ -1,3 +1,4 @@
+from tracemalloc import stop
 from engine.config import *
 
 import time
@@ -52,8 +53,9 @@ def takecommand():
 def allCommands(typequery=1):
     music_dir = "www\\assets\\audio\\start_sound.mp3"
     playsound(music_dir)
-    # query = ""
 
+    histring = 'hi '+ASSISTANT_NAME
+    print()
     # input from chatbox
     if typequery == 1:
         query = takecommand()
@@ -62,8 +64,8 @@ def allCommands(typequery=1):
         time.sleep(2)
         query = typequery
 
-    if "hi sofia" in query:
-        speak("Hi Sir")
+    if "hi" + ASSISTANT_NAME in query or "hi" in query:
+        speak("Hi "+OWNER_NAME)
     elif "open" in query:
         from engine.features import openCommand
         openCommand(query)
@@ -77,14 +79,19 @@ def allCommands(typequery=1):
 
     elif "weather" in query:
         from engine.features import weather
-        weather("adawad weather")
+        weather(query)
+
+    elif "call disconnect" in query or "disconnect call" in query or "stop call" in query:
+        from engine.features import DisconnectCall
+        DisconnectCall()
 
     elif query == "call":
         speak("who do you want to call ?")
         query = takecommand()
         from engine.features import MakeCall
         MakeCall(query)
-    elif "call" in query and "phone" in query:
+
+    elif "call" in query or "phone" in query:
         from engine.features import MakeCall
         MakeCall(query)
 
