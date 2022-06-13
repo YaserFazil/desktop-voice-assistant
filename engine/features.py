@@ -279,16 +279,21 @@ def weather(query):
         f'https://www.google.com/search?q={city}&oq={city}&aqs=chrome.0.35i39l2j0l4j46j69i60.6128j1j7&sourceid=chrome&ie=UTF-8', headers=headers)
     print("Searching...\n")
     soup = BeautifulSoup(res.text, 'html.parser')
-    location = soup.select('#wob_loc')[0].getText().strip()
-    time = soup.select('#wob_dts')[0].getText().strip()
-    info = soup.select('#wob_dc')[0].getText().strip()
-    weather = soup.select('#wob_tm')[0].getText().strip()
-    print(location)
-    print(time)
-    print(info)
-    print(weather+"°C")
-    eel.weatherShow(info, weather+" °C", location, time)
-    speak("its "+weather+" degree celsius and "+info+" in "+location)
+
+    try:
+
+        location = soup.select('#wob_loc')[0].getText().strip()
+        time = soup.select('#wob_dts')[0].getText().strip()
+        info = soup.select('#wob_dc')[0].getText().strip()
+        weather = soup.select('#wob_tm')[0].getText().strip()
+        print(location)
+        print(time)
+        print(info)
+        print(weather+"°C")
+        eel.weatherShow(info, weather+" °C", location, time)
+        speak("its "+weather+" degree celsius and "+info+" in "+location)
+    except IndexError:
+        speak("Can't found city " + query)
 
 
 #  ************************************************** WEATHER METHOD **********************************************
@@ -336,3 +341,90 @@ def DisconnectCall():
     command = 'adb shell service call phone 5'
     speak("disconnecting call...")
     os.system(command)
+
+
+# Settings Function
+def systemCommand():
+    cursor.execute("SELECT * FROM sys_command")
+    results = cursor.fetchall()
+    print(results)
+
+
+@eel.expose
+def personalInfo():
+    cursor.execute("SELECT * FROM info")
+    results = cursor.fetchall()
+    jsonArr = json.dumps(results[0])
+    eel.getData(jsonArr)
+    return 1
+
+
+@eel.expose
+def updatePersonalInfo(name, desiganation, mobileno, email, city):
+    cursor.execute('''UPDATE info SET name=?, designation=?, mobileno=?, email=?, city=? ''',
+                   (name, desiganation, mobileno, email, city))
+    connection.commit()
+    personalInfo()
+    return 1
+
+
+@eel.expose
+def displaySysCommand():
+    cursor.execute("SELECT * FROM sys_command")
+    results = cursor.fetchall()
+    jsonArr = json.dumps(results)
+    eel.displaySysCommand(jsonArr)
+    return 1
+
+
+@eel.expose
+def deleteSysCommand(id):
+    cursor.execute(
+        ''' DELETE FROM sys_command WHERE name= '%s' ''' % id.strip())
+    connection.commit()
+
+
+@eel.expose
+def addSysCommand(key, value):
+    cursor.execute(
+        '''INSERT INTO sys_command VALUES (?, ?)''', (key, value))
+    connection.commit()
+
+
+@eel.expose
+def displayWebCommand():
+    cursor.execute("SELECT * FROM web_command")
+    results = cursor.fetchall()
+    jsonArr = json.dumps(results)
+    eel.displayWebCommand(jsonArr)
+    return 1
+
+
+@eel.expose
+def addWebCommand(key, value):
+    cursor.execute(
+        '''INSERT INTO web_command VALUES (?, ?)''', (key, value))
+    connection.commit()
+
+
+@eel.expose
+def deleteWebCommand(id):
+    cursor.execute(
+        ''' DELETE FROM web_command WHERE name= '%s' ''' % id.strip())
+    connection.commit()
+
+
+@eel.expose
+def displayPhoneBookCommand():
+    cursor.execute("SELECT * FROM phonebook")
+    results = cursor.fetchall()
+    jsonArr = json.dumps(results)
+    eel.displayPhoneBookCommand(jsonArr)
+    return 1
+
+
+@eel.expose
+def deletePhoneBookCommand(id):
+    cursor.execute(
+        ''' DELETE FROM phonebook WHERE mobileno= '%s' ''' % id.strip())
+    connection.commit()

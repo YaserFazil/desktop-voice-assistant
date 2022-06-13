@@ -1,7 +1,13 @@
 $(document).ready(function () {
     eel.Start()();
-    eel.expose(WishMessage)
 
+    eel.expose(WishMessage)
+    function WishMessage(message) {
+
+        $(".text li:first").text(message);
+        $('.text').textillate('start');
+
+    }
     $('.text').textillate({
         loop: true,
         sync: true,
@@ -30,12 +36,7 @@ $(document).ready(function () {
         }
     });
 
-    function WishMessage(message) {
 
-        $(".text li:first").text(message);
-        $('.text').textillate('start');
-
-    }
 
     // Hide Start Page and display blob
     eel.expose(hideStart)
@@ -128,6 +129,235 @@ $(document).ready(function () {
             PlayAssistant(message)
         }
     });
+
+
+    // Settings Code
+
+    eel.personalInfo()();
+    eel.displaySysCommand()();
+    eel.displayWebCommand()();
+    eel.displayPhoneBookCommand()();
+
+
+
+    // Execute: python side :
+    eel.expose(getData)
+    function getData(user_info) {
+        let data = JSON.parse(user_info);
+        let idsPersonalInfo = ['OwnerName', 'Designation', 'MobileNo', 'Email', 'City']
+        let idsInputInfo = ['InputOwnerName', 'InputDesignation', 'InputMobileNo', 'InputEmail', 'InputCity']
+
+        for (let i = 0; i < data.length; i++) {
+            hashid = "#" + idsPersonalInfo[i]
+            $(hashid).text(data[i]);
+            $("#" + idsInputInfo[i]).val(data[i]);
+        }
+
+    }
+
+    // Personal Data Update Button:
+
+    $("#UpdateBtn").click(function () {
+
+        let OwnerName = $("#InputOwnerName").val();
+        let Designation = $("#InputDesignation").val();
+        let MobileNo = $("#InputMobileNo").val();
+        let Email = $("#InputEmail").val();
+        let City = $("#InputCity").val();
+
+        if (OwnerName.length > 0 && Designation.length > 0 && MobileNo.length > 0 && Email.length > 0 && City.length > 0) {
+            eel.updatePersonalInfo(OwnerName, Designation, MobileNo, Email, City)
+
+            swal({
+                title: "Updated Successfully",
+                icon: "success",
+            });
+
+
+        }
+        else {
+            const toastLiveExample = document.getElementById('liveToast')
+            const toast = new bootstrap.Toast(toastLiveExample)
+
+            $("#ToastMessage").text("All Fields Medatory");
+
+            toast.show()
+        }
+
+    });
+
+
+    // Display System Command Method
+    eel.expose(displaySysCommand)
+    function displaySysCommand(array) {
+
+        let data = JSON.parse(array);
+        console.log(data)
+
+        let placeholder = document.querySelector("#TableData");
+        let out = "";
+        let index = 0
+        for (let i = 0; i < data.length; i++) {
+            index++
+            out += `
+                    <tr>
+                        <td class="text-light"> ${index} </td>
+                        <td class="text-light"> ${data[i][0]} </td>
+                        <td class="text-light"> ${data[i][1]} </td>
+                        <td class="text-light"> <button id="${data[i][0]}" onClick="SysDeleteID(this.id)" class="btn btn-sm btn-glow-red">Delete</button></td>
+                        
+                    </tr>
+            `;
+
+            // console.log(data[i][0])
+            // console.log(data[i][1])
+
+
+        }
+
+        placeholder.innerHTML = out;
+
+    }
+
+    // Add System Command Button
+    $("#SysCommandAddBtn").click(function () {
+
+        let key = $("#SysCommandKey").val();
+        let value = $("#SysCommandValue").val();
+
+        if (key.length > 0 && value.length) {
+            eel.addSysCommand(key, value)
+
+            swal({
+                title: "Updated Successfully",
+                icon: "success",
+            });
+            eel.displaySysCommand()();
+            $("#SysCommandKey").val("");
+            $("#SysCommandValue").val("");
+
+
+        }
+        else {
+            const toastLiveExample = document.getElementById('liveToast')
+            const toast = new bootstrap.Toast(toastLiveExample)
+
+            $("#ToastMessage").text("All Fields Medatory");
+
+            toast.show()
+        }
+
+    });
+
+
+    // Display Web Commands Table
+    eel.expose(displayWebCommand)
+    function displayWebCommand(array) {
+
+        let data = JSON.parse(array);
+        console.log(data)
+
+        let placeholder = document.querySelector("#WebTableData");
+        let out = "";
+        let index = 0
+        for (let i = 0; i < data.length; i++) {
+            index++
+            out += `
+                    <tr>
+                        <td class="text-light"> ${index} </td>
+                        <td class="text-light"> ${data[i][0]} </td>
+                        <td class="text-light"> ${data[i][1]} </td>
+                        <td class="text-light"> <button id="${data[i][0]}" onClick="WebDeleteID(this.id)" class="btn btn-sm btn-glow-red">Delete</button></td>
+                        
+                    </tr>
+            `;
+
+            // console.log(data[i][0])
+            // console.log(data[i][1])
+
+
+        }
+
+        placeholder.innerHTML = out;
+
+    }
+
+
+    // Add Web Commands
+
+    $("#WebCommandAddBtn").click(function () {
+
+        let key = $("#WebCommandKey").val();
+        let value = $("#WebCommandValue").val();
+
+        if (key.length > 0 && value.length) {
+            eel.addWebCommand(key, value)
+
+            swal({
+                title: "Updated Successfully",
+                icon: "success",
+            });
+            eel.displayWebCommand()();
+            $("#WebCommandKey").val("");
+            $("#WebCommandValue").val("");
+
+
+        }
+        else {
+            const toastLiveExample = document.getElementById('liveToast')
+            const toast = new bootstrap.Toast(toastLiveExample)
+
+            $("#ToastMessage").text("All Fields Medatory");
+
+            toast.show()
+        }
+
+    });
+
+
+    // Display Phone Book
+
+    eel.expose(displayPhoneBookCommand)
+    function displayPhoneBookCommand(array) {
+
+        let data = JSON.parse(array);
+        console.log(data)
+
+        let placeholder = document.querySelector("#ContactTableData");
+        let out = "";
+        let index = 0
+        for (let i = 0; i < data.length; i++) {
+            index++
+            out += `
+                    <tr>
+                        <td class="text-light"> ${index} </td>
+                        <td class="text-light"> ${data[i][0]} </td>
+                        <td class="text-light"> ${data[i][1]} </td>
+                        <td class="text-light"> ${data[i][2]} </td>
+                        <td class="text-light"> ${data[i][3]} </td>
+                        <td class="text-light"> <button id="${data[i][1]}" onClick="ContactDeleteID(this.id)" class="btn btn-sm btn-glow-red">Delete</button></td>
+                        
+                    </tr>
+            `;
+
+
+        }
+
+        placeholder.innerHTML = out;
+
+    }
+
+
+
+    // $(".btn-delete").click(function () {
+
+    //     console.log($(this).attr('id'));
+
+    // });
+
+
+
+
 
 
     /* ------------------------------------------------------------------------------------------
