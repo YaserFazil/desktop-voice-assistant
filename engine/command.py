@@ -24,8 +24,8 @@ engine.setProperty('rate', 174)
 
 
 def speak(audio):
-
     engine.say(audio)
+    eel.SpeakMessage(audio)
     engine.runAndWait()
 
 
@@ -64,9 +64,7 @@ def allCommands(typequery=1):
         time.sleep(2)
         query = typequery
 
-    if "hi" + ASSISTANT_NAME in query or "hi" in query:
-        speak("Hi "+OWNER_NAME)
-    elif "open" in query:
+    if "open" in query:
         from engine.features import openCommand
         openCommand(query)
     elif "close" in query:
@@ -97,12 +95,17 @@ def allCommands(typequery=1):
 
     elif "happy" in query or "day" in query:
         speak("Thank You Sir")
+
     else:
-        print("i run")
         if query == "none":
             print(query)
             pass
         else:
-            from engine.features import searchTerm
-            searchTerm(query)
+            from engine.bot import bot
+            returnString = bot(query)
+            if returnString != 0:
+                speak(returnString)
+            else:
+                from engine.features import searchTerm
+                searchTerm(query)
     eel.hideSpectrum()

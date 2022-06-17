@@ -61,7 +61,7 @@
 <body>
     <div class="main">
 
-        <section id="Start">
+        <section id="Start" hidden>
             <div class="row">
                 <div class="col-lg-12">
                     <div class="d-flex justify-content-center align-items-center" style="height: 90vh;">
@@ -89,7 +89,7 @@
             </div>
         </section>
 
-        <section id="Oval" class="mb-4" hidden>
+        <section id="Oval" class="mb-4">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="d-flex justify-content-center align-items-center" style="height: 80vh;">
@@ -158,14 +158,15 @@
     </div>
 
 
-    <!-- Modal -->
+    <!-- Modal Settings-->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl">
             <div class="modal-content glass-effect">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel" style="color: white; text-align: center;">Assistant
                         Settings</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close btn-glow-red" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <nav>
@@ -179,9 +180,6 @@
                             <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab"
                                 data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact"
                                 aria-selected="false">Phone Book</button>
-                            <button class="nav-link" id="nav-disabled-tab" data-bs-toggle="tab"
-                                data-bs-target="#nav-disabled" type="button" role="tab" aria-controls="nav-disabled"
-                                aria-selected="false" disabled>Disabled</button>
                         </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
@@ -198,9 +196,9 @@
                                     <button class="nav-link btn-style" id="EditProfileTab-tab" data-bs-toggle="pill"
                                         data-bs-target="#EditProfileTab" type="button" role="tab"
                                         aria-controls="EditProfileTab" aria-selected="false">Edit</button>
-                                    <button class="nav-link btn-style" id="AboutTab-tab" data-bs-toggle="pill"
+                                    <!-- <button class="nav-link btn-style" id="AboutTab-tab" data-bs-toggle="pill"
                                         data-bs-target="#AboutTab" type="button" role="tab" aria-controls="AboutTab"
-                                        aria-selected="false">About</button>
+                                        aria-selected="false">About</button> -->
                                 </div>
                                 <div class="tab-content" id="v-pills-tabContent">
 
@@ -295,10 +293,10 @@
                                             data-bs-target="#WebCommand" type="button" role="tab"
                                             aria-controls="WebCommand" aria-selected="false">Web
                                         </button>
-                                        <button class="nav-link btn-style" id="HelpCommand-tab" data-bs-toggle="pill"
+                                        <!-- <button class="nav-link btn-style" id="HelpCommand-tab" data-bs-toggle="pill"
                                             data-bs-target="#HelpCommand" type="button" role="tab"
                                             aria-controls="HelpCommand" aria-selected="false">
-                                            Help</button>
+                                            Help</button> -->
                                     </div>
                                     <div class="tab-content" id="v-pills-tabContent">
 
@@ -505,8 +503,6 @@
                             </div>
 
                         </div>
-                        <div class="tab-pane fade" id="nav-disabled" role="tabpanel" aria-labelledby="nav-disabled-tab"
-                            tabindex="0">...</div>
                     </div>
                 </div>
             </div>
@@ -527,6 +523,8 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal Settings -->
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

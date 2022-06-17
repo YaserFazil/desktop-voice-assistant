@@ -298,25 +298,14 @@ def weather(query):
 
 #  ************************************************** WEATHER METHOD **********************************************
 
-
-# def bot():
-#     f = open('bot.json')
-#     jtopy = json.dumps(f)
-#     data = json.loads(jtopy)
-
-# Iterating through the json
-# list
-# for i in data['data']:
-#     print(i)
-
-# Closing file
-# f.close()
-
-
-# bot()
-
-
+# Assistant name
+@eel.expose
+def assistantName():
+    name = ASSISTANT_NAME
+    return name
 # Make Phone Call Command
+
+
 def MakeCall(query):
     query = query.replace(ASSISTANT_NAME, "")
     query = query.replace("to", "")
@@ -427,4 +416,11 @@ def displayPhoneBookCommand():
 def deletePhoneBookCommand(id):
     cursor.execute(
         ''' DELETE FROM phonebook WHERE mobileno= '%s' ''' % id.strip())
+    connection.commit()
+
+
+@eel.expose
+def InsertContacts(Name, MobileNo, Email, City):
+    cursor.execute(
+        '''INSERT INTO phonebook VALUES (?, ?, ?, ?)''', (Name, MobileNo, Email, City))
     connection.commit()

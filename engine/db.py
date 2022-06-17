@@ -22,7 +22,7 @@ cursor = connection.cursor()
 #     '''INSERT INTO info VALUES ('digambar', 'CSE Student', '7620464305', 'chaudharidigambar52002@gmail.com','Adawad')''')
 # connection.commit()
 
-# cursor.execute("DELETE  FROM hospitals")
+# cursor.execute("DROP Table hospitals")
 # connection.commit()
 
 

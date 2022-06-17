@@ -1,6 +1,12 @@
 $(document).ready(function () {
     eel.Start()();
 
+    eel.expose(AssistantName)
+    function AssistantName(name) {
+        document.title = name;
+
+    }
+
     eel.expose(WishMessage)
     function WishMessage(message) {
 
@@ -347,14 +353,48 @@ $(document).ready(function () {
 
     }
 
+    // Add Contacts to database
 
+    $("#AddContactBtn").click(function () {
 
-    // $(".btn-delete").click(function () {
+        let Name = $("#InputContactName").val();
+        let MobileNo = $("#InputContactMobileNo").val();
+        let Email = $("#InputContactEmail").val();
+        let City = $("#InputContactCity").val();
 
-    //     console.log($(this).attr('id'));
+        if (Name.length > 0 && MobileNo.length > 0) {
 
-    // });
+            if (Email.length < 0) {
+                Email = "";
+            }
+            else if (City < 0) {
+                City = "";
+            }
 
+            eel.InsertContacts(Name, MobileNo, Email, City)
+
+            swal({
+                title: "Updated Successfully",
+                icon: "success",
+            });
+
+            $("#InputContactName").val("");
+            $("#InputContactMobileNo").val("");
+            $("#InputContactEmail").val("");
+            $("#InputContactCity").val("");
+            eel.displayPhoneBookCommand()()
+
+        }
+        else {
+            const toastLiveExample = document.getElementById('liveToast')
+            const toast = new bootstrap.Toast(toastLiveExample)
+
+            $("#ToastMessage").text("Name and Mobile number Madatory");
+
+            toast.show()
+        }
+
+    });
 
 
 
