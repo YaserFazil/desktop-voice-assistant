@@ -3,13 +3,14 @@
 import os
 from statistics import mode
 import eel
-
+import subprocess
 from engine.command import *
 from engine.features import *
 
 from engine.config import *
 
 eel.init('www')
+
 
 if __name__ == "__main__":
 
@@ -23,12 +24,11 @@ if __name__ == "__main__":
 
     @eel.expose
     def Start():
-        # os.system("static/devices.bat")
+        subprocess.call([r'C:\Users\Admin\Desktop\Disha\static\devices.bat'])
         eel.AssistantName(ASSISTANT_NAME)
         from engine.features import wish
         wish()
         eel.hideStart()
         eel.init()
-        # allCommands()
 
     eel.start("index.html")
