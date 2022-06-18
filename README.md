@@ -15,48 +15,8 @@ Disha is a virtual Assistant developed to overcome the Microsoft Cortana. When I
  - Play Video/songs on YouTube
  - Check Weather
  
- 
 ## Download Setup 
-Download setup files for Windows 
-
-**Requirements**
-
-- [Google Chrome Installed](https://www.google.com/intl/en_in/chrome/)
-- [Android SDK installed in your pc](https://developer.android.com/studio/releases/platform-tools)
-
-click to download setup 
-## Download Setup 
-Download setup files for Windows 
-
-**Requirements**
-
-- [Google Chrome Installed](https://www.google.com/intl/en_in/chrome/)
-- [Android SDK installed in your pc](https://developer.android.com/studio/releases/platform-tools)
-
-click to download setup 
-
-## Download Setup 
-Download setup files for Windows 
-
-**Requirements**
-
-- [Google Chrome Installed](https://www.google.com/intl/en_in/chrome/)
-- [Android SDK installed in your pc](https://developer.android.com/studio/releases/platform-tools)
-
-click to download setup 
-
-## Download Setup 
-Download setup files for Windows 
-
-**Requirements**
-
-- [Google Chrome Installed](https://www.google.com/intl/en_in/chrome/)
-- [Android SDK installed in your pc](https://developer.android.com/studio/releases/platform-tools)
-
-click to download setup 
-
-## Download Setup 
-Download setup files for Windows 
+Before download setup file please full fill the following requirements 
 
 **Requirements**
 
