@@ -14,7 +14,20 @@ Disha is a virtual Assistant developed to overcome the Microsoft Cortana. When I
  - Chat with you
  - Play Video/songs on YouTube
  - Check Weather
+
+## Screenshots
+1] Home Screen
+
+![App Screenshot](https://raw.githubusercontent.com/digambar2002/image-hosting/main/assistant.png)
+
+2] Listening and recognizing 
+
+![App Screenshot](https://raw.githubusercontent.com/digambar2002/image-hosting/main/assistant-listen.png)
  
+3] Weather Feature
+
+![App Screenshot](https://raw.githubusercontent.com/digambar2002/image-hosting/main/assistant-weather.png)
+
 ## Download Setup 
 Before download setup file please full fill the following requirements 
 
