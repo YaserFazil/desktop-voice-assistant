@@ -18,7 +18,7 @@ Disha is a virtual Assistant developed to overcome the Microsoft Cortana. When I
 ## Screenshots
 1] Home Screen
 
-![App Screenshot](https://raw.githubusercontent.com/digambar2002/image-hosting/main/assistant.png)
+![App Screenshot](https://drive.google.com/uc?export=download&id=1BBa_PKiohGr6EJlZAU29qZx-ObXCmPOm)
 
 2] Listening and recognizing 
 
