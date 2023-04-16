@@ -44,6 +44,32 @@ $(document).ready(function () {
 
 
 
+    // Hide Loader and display Face Auth animation
+    eel.expose(hideLoader)
+    function hideLoader() {
+
+        $("#Loader").attr("hidden", true);
+        $("#FaceAuth").attr("hidden", false);
+
+    }
+
+    // Hide Face auth and display Face Auth success animation
+    eel.expose(hideFaceAuth)
+    function hideFaceAuth() {
+
+        $("#FaceAuth").attr("hidden", true);
+        $("#FaceAuthSuccess").attr("hidden", false);
+
+    }
+    // Hide success and display 
+    eel.expose(hideFaceAuthSuccess)
+    function hideFaceAuthSuccess() {
+
+        $("#FaceAuthSuccess").attr("hidden", true);
+
+    }
+
+
     // Hide Start Page and display blob
     eel.expose(hideStart)
     function hideStart() {

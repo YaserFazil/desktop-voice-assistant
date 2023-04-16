@@ -58,7 +58,7 @@ cursor = connection.cursor()
 engine = pyttsx3.init()
 voices = engine.getProperty('voices')
 # print(voices[1].id)
-engine.setProperty('voice', voices[2].id)
+engine.setProperty('voice', voices[0].id)
 engine.setProperty('rate', 174)
 
 # text to speech
@@ -70,6 +70,14 @@ def speak(audio):
     eel.SpeakMessage(audio)
     engine.runAndWait()
     return audio
+
+
+def auth_protocol():
+    # Hide the loader screen and display face auth using js
+    eel.hideLoader()
+    speak('ready for face authentication')
+    speak('performing face authentication')
+
 # Battery status function
 
 
@@ -127,20 +135,13 @@ def wish():
         '%I %M %p').lstrip("0").replace(" 0", " ")
     if hour > 0 and hour < 12:
         eel.WishMessage(speak("Hello, Good Morning "+OWNER_NAME))
-        eel.WishMessage(speak("it's " + currentTime))
-        eel.WishMessage(speak("I am " + ASSISTANT_NAME +
-                        ", Your Personal Assistant"))
 
     elif hour >= 12 and hour < 18:
         eel.WishMessage(speak("Hello, Good Afternoon "+OWNER_NAME))
-        eel.WishMessage(speak("it's " + currentTime))
-        eel.WishMessage(speak("I am " + ASSISTANT_NAME +
-                        ", Your Personal Assistant"))
     else:
         eel.WishMessage(speak("Hello, Good Evening "+OWNER_NAME))
-        eel.WishMessage(speak("it's " + currentTime))
-        eel.WishMessage(speak("I am " + ASSISTANT_NAME +
-                        ", Your Personal Assistant"))
+
+    speak('How can i help you')
 
 # Open Commands
 
@@ -214,6 +215,34 @@ def searchTerm(query):
     speak("here what i found on web")
     # term = wikipedia.summary(query, sentences=2)
     # speak(term)
+
+# Chat Gpt
+
+# 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
+
+
+def chatGPT(query):
+    query = query.replace(ASSISTANT_NAME, "")
+    query = query.replace("search", "")
+
+    import openai
+    openai.api_key = "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"
+    prompt = query
+
+    try:
+
+        response = openai.Completion.create(
+            engine="text-davinci-002",
+            prompt=prompt,
+            max_tokens=600,
+            n=1,
+            stop=None,
+            temperature=0.5,
+        )
+        speak(response.choices[0].text.strip())
+    except:
+        speak("something went wrong")
+
 
 # Play On YouTube
 

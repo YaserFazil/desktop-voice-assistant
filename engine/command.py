@@ -1,3 +1,4 @@
+import os
 from tracemalloc import stop
 from engine.config import *
 
@@ -17,9 +18,9 @@ import eel
 
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
-# print(voices[0].id)
-engine.setProperty('voice', voices[2].id)
-# print(voices)
+print(voices[0].id)
+print(voices)
+engine.setProperty('voice', voices[0].id)
 engine.setProperty('rate', 174)
 
 
@@ -96,6 +97,15 @@ def allCommands(typequery=1):
     elif "happy" in query or "day" in query:
         speak("Thank You Sir")
 
+    elif "battery status" in query or "power status" in query:
+        from engine.features import battery
+        battery()
+
+    elif "shutdown" in query or "power off" in query:
+        speak("shutdown process started")
+        speak("Have a good day "+OWNER_NAME)
+        os.system('shutdown -s')
+
     else:
         if query == "none":
             print(query)
@@ -106,6 +116,7 @@ def allCommands(typequery=1):
             if returnString != 0:
                 speak(returnString)
             else:
-                from engine.features import searchTerm
-                searchTerm(query)
+                from engine.features import chatGPT
+                print("chat gpt run")
+                chatGPT(query)
     eel.hideSpectrum()

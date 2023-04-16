@@ -17,6 +17,6 @@ cursor.execute("SELECT * FROM info")
 results = cursor.fetchall()
 print(results[0][0])
 
-ASSISTANT_NAME = "Disha"
+ASSISTANT_NAME = "Jarvis"
 OWNER_NAME = results[0][0]
 CITY_NAME = results[0][4]
