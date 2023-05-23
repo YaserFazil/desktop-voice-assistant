@@ -516,3 +516,24 @@ svg {
     transform: rotate(360deg);
   }
 }
+
+@media only screen and (max-width: 768px) {
+
+  #siri-container canvas{
+
+    width: 450px !important;
+
+  }
+
+  #TextInput{
+    margin: 0px 10%;
+  }
+
+  .square {
+
+    width: 350px;
+    height: 350px;
+  
+}
+
+}

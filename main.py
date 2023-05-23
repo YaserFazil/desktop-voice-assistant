@@ -1,21 +1,35 @@
+# -------- main file to run jarvis
 
-# eel gui library
+
 from enum import Flag
 import os
 from statistics import mode
-import eel
-import subprocess
-from engine.command import *
-from engine.features import *
-from authenticate.recoganize import AuthenticateFace
-from engine.config import *
-import cv2
 
+# eel gui library
+import eel
+
+# to run subprocess
+import subprocess
+
+# Carry all commands
+from engine.command import *
+
+# Contains all features of assistant
+from engine.features import *
+
+# Use for face authentication
+from authenticate.recoganize import AuthenticateFace
+
+# Default configaration file
+from engine.config import *
+
+# init www directory contains GUI
 eel.init('www')
 
+# Function to start jarvis: used by run.py file
+def start():
 
-if __name__ == "__main__":
-
+    # Play sound when assistant start
     music_dir = "www\\assets\\audio\\start_sound.mp3"
     playsound(music_dir)
 
@@ -24,6 +38,9 @@ if __name__ == "__main__":
         music_dir = "www\\assets\\audio\\start_sound.mp3"
         playsound(music_dir)
 
+
+
+    # Start Jarivs by GUI
     @eel.expose
     def Start():
         subprocess.call([r'static\\devices.bat'])
@@ -31,15 +48,15 @@ if __name__ == "__main__":
         eel.AssistantName(ASSISTANT_NAME)
 
         from engine.features import auth_protocol
-        auth_protocol()
-        flag = AuthenticateFace()
-        # flag =1 #skip face authenticate
+        # auth_protocol()
+        # flag = AuthenticateFace()
+        flag =1 #skip face authenticate
         print(flag)
         if flag == 1:
 
-            eel.hideFaceAuth()
-            speak("Face authentication successfull")
-            eel.hideFaceAuthSuccess()
+            # eel.hideFaceAuth()
+            # speak("Face authentication successfull")
+            # eel.hideFaceAuthSuccess()
 
             from engine.features import wish
             wish()
@@ -48,7 +65,10 @@ if __name__ == "__main__":
         else:
             speak("authentication fail")
 
+    # Use MS Edge default browser
     os.system('start msedge.exe --app="http://localhost:8000/index.html"')
+    
+    # Run Index file in browser
     eel.start("index.html", mode=None,
               host='localhost',
               block=True)
