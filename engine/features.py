@@ -9,6 +9,7 @@ from sys import path
 import sys
 import eel
 from pyparsing import Empty
+import requests
 
 # This Module is ued to convert text to speech
 import pyttsx3
@@ -240,6 +241,42 @@ def chatGPT(query):
             temperature=0.5,
         )
         speak(response.choices[0].text.strip())
+    except:
+        speak("something went wrong")
+
+def chatGPT2(query):
+    query = query.replace(ASSISTANT_NAME, "")
+    query = query.replace("search", "")
+
+    import openai
+    openai.api_key = "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"
+    prompt = query
+
+    try:
+
+        url = "https://openai80.p.rapidapi.com/chat/completions"
+
+        payload = {
+            "model": "gpt-3.5-turbo",
+            "messages": [
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ]
+        }
+        headers = {
+            "content-type": "application/json",
+            "X-RapidAPI-Key": "d68c7a4ca0mshfe7db0559a72ad6p1f118fjsnb3beeaa77aac",
+            "X-RapidAPI-Host": "openai80.p.rapidapi.com"
+        }
+
+        response = requests.post(url, json=payload, headers=headers)
+        choice = response.json()['choices']
+        list =  choice[0]
+        message = list['message']
+        print(message)
+        speak(message['content'])
     except:
         speak("something went wrong")
 
